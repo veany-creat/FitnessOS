@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#eaf6ff" />
+    <meta name="color-scheme" content="light" />
+    <meta name="description" content="Fitness OS — 专注每日行动的轻量健身与体态记录。" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Fitness OS" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./icons/icon-180.png" />
+    <link rel="icon" href="./icons/icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Fitness OS</title>
+  </head>
+  <body>
+    <div class="ambient-field" aria-hidden="true">
+      <span class="ambient-orb ambient-orb--blue"></span>
+      <span class="ambient-orb ambient-orb--mint"></span>
+      <span class="ambient-orb ambient-orb--violet"></span>
+    </div>
+
+    <div class="app-shell">
+      <main class="app-main" id="main-content">
+        <section class="page is-active" id="page-today" data-page="today" aria-label="今日">
+          <article class="glass-card goal-card" aria-labelledby="goal-title">
+            <div class="goal-copy">
+              <div>
+                <p class="section-kicker">第一阶段目标</p>
+                <h2 id="goal-title" class="goal-weight"><span>145</span><small>斤</small><i aria-hidden="true">→</i><span>130</span><small>斤</small></h2>
+              </div>
+              <div class="streak-pill" aria-label="连续完成天数">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.2 2.7c.4 3-1 4.5-2.1 5.7-1.1 1.2-2 2.3-1.3 4.1.4-1.3 1.2-2.2 2.4-3.1-.1 2 .8 3 1.7 4 .8.9 1.6 1.8 1.5 3.4 1.5-.9 2.5-2.6 2.5-4.6 0-2.8-1.7-5.8-4.7-9.5Z"/><path d="M9.2 11.7c-2 1.7-3.1 3.5-3.1 5.5A5.9 5.9 0 0 0 12 23a5.9 5.9 0 0 0 5.9-5.8"/></svg>
+                <span><strong id="streak-count">0</strong> 天连续完成</span>
+              </div>
+            </div>
+
+            <div class="progress-ring-wrap" role="img" aria-label="今日完成 0%" id="progress-ring-label">
+              <svg class="progress-ring" viewBox="0 0 128 128" aria-hidden="true">
+                <defs>
+                  <linearGradient id="ring-gradient" x1="16" y1="112" x2="112" y2="16" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stop-color="#39d7b4" />
+                    <stop offset=".48" stop-color="#43b8f4" />
+                    <stop offset="1" stop-color="#8a82f7" />
+                  </linearGradient>
+                  <filter id="ring-glow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="3.8" />
+                  </filter>
+                </defs>
+                <circle class="ring-track" cx="64" cy="64" r="48" />
+                <circle class="ring-glow" cx="64" cy="64" r="48" />
+                <circle class="ring-progress" cx="64" cy="64" r="48" />
+                <circle class="ring-highlight" cx="64" cy="64" r="48" />
+              </svg>
+              <div class="ring-value"><strong id="progress-value">0</strong><span>%</span><small>今日完成</small></div>
+            </div>
+          </article>
+
+          <section class="content-section" aria-labelledby="tasks-title">
+            <div class="section-heading">
+              <div>
+                <p class="section-kicker">每日清单</p>
+                <h2 id="tasks-title">今天要完成</h2>
+              </div>
+              <span class="count-label" id="task-count">0 / 8</span>
+            </div>
+            <div class="glass-card task-list" id="task-list"></div>
+          </section>
+
+          <section class="content-section" aria-labelledby="overview-title">
+            <div class="section-heading">
+              <div>
+                <p class="section-kicker">保持节奏</p>
+                <h2 id="overview-title">今日概览</h2>
+              </div>
+            </div>
+            <div class="metric-grid">
+              <article class="glass-card metric-card metric-card--protein">
+                <div class="metric-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M8.3 5.6c.8-2 2.8-3.3 5-3.1 2.5.2 4.5 2.4 4.4 5 0 .7-.2 1.4-.5 2l-1.6 3.1a4.8 4.8 0 0 1-6.8 1.9 4.8 4.8 0 0 1-1.7-6.4l1.2-2.5Z"/><path d="m8.5 12.6-2.8 4.8M4.1 15.8l3.4 2M3 19l2.1 1.3"/></svg>
+                </div>
+                <div><p>蛋白质目标</p><strong>110<small>g</small></strong></div>
+              </article>
+              <article class="glass-card metric-card metric-card--steps">
+                <div class="metric-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M8.6 12.6c1.7.6 2.6 2.3 2 3.8l-1.1 2.8c-.6 1.5-2.6 2.2-4.3 1.5-1.8-.7-2.7-2.4-2-3.9l1.1-2.7c.6-1.5 2.5-2.2 4.3-1.5ZM15.4 4c1.5-.4 3 .5 3.4 2l.7 3.4c.4 1.7-.5 3.3-2 3.7-1.5.3-3-.8-3.4-2.4l-.8-3.4c-.3-1.6.6-3 2.1-3.3Z"/><path d="M7.3 10.2 6.8 8M16 15.4l.7 3.1"/></svg>
+                </div>
+                <div><p>步数目标</p><strong>8000<small>步</small></strong></div>
+              </article>
+            </div>
+          </section>
+        </section>
+
+        <section class="page" id="page-food" data-page="food" aria-labelledby="food-title" hidden>
+          <header class="page-header">
+            <div><p class="eyebrow">简单，稳定，可坚持</p><h1 class="large-title" id="food-title">饮食速查</h1></div>
+          </header>
+
+          <div class="food-stack">
+            <article class="glass-card food-card food-card--morning">
+              <div class="food-card-header">
+                <div class="food-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 9.5h14v3.8a7 7 0 0 1-14 0V9.5Z"/><path d="M8 6.5c0-1 .8-1.8 1.8-1.8M12 6.5c0-1 .8-1.8 1.8-1.8M19 11h1.1a2.4 2.4 0 0 1 0 4.8H18"/></svg></div>
+                <div><p class="section-kicker">07:00–09:00</p><h2>早餐</h2></div>
+              </div>
+              <p class="food-description">鸡蛋2个 + 乳清1勺 + 燕麦40g或全麦面包2片 + 香蕉1根。</p>
+              <div class="tag-row"><span class="glass-tag">高蛋白</span><span class="glass-tag">稳定能量</span></div>
+            </article>
+
+            <article class="glass-card food-card food-card--noon">
+              <div class="food-card-header">
+                <div class="food-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4.5"/><path d="M4 4v6M2.5 7h3M20 4v16M18.5 8h3"/></svg></div>
+                <div><p class="section-kicker">食堂选择法</p><h2>午餐</h2></div>
+              </div>
+              <div class="portion-row" aria-label="一拳主食、两拳蛋白、两拳蔬菜">
+                <span><strong>1</strong>拳主食</span><span><strong>2</strong>拳蛋白</span><span><strong>2</strong>拳蔬菜</span>
+              </div>
+              <p class="food-description">食堂菜偏油时减少汤汁，优先鸡、鱼、牛、蛋和豆腐。</p>
+            </article>
+
+            <article class="glass-card food-card food-card--training">
+              <div class="food-card-header">
+                <div class="food-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 8v8M4.5 10v4M17 8v8M19.5 10v4M7 12h10"/><path d="M2.5 12h2M19.5 12h2"/></svg></div>
+                <div><p class="section-kicker">围绕训练安排</p><h2>训练前后</h2></div>
+              </div>
+              <p class="food-description">训练前1–2小时吃半拳至一拳主食并搭配蛋白质。训练后根据全天蛋白质摄入补一勺乳清；很饿时可以加香蕉。</p>
+              <div class="tag-row"><span class="glass-tag">提前 1–2 小时</span><span class="glass-tag">按需补充乳清</span></div>
+            </article>
+
+            <article class="glass-card food-card food-card--reward">
+              <div class="food-card-header">
+                <div class="food-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"/><path d="M9.2 3.6A3 3 0 0 1 12 2a3 3 0 0 1 2.8 1.6M8.6 12.2l2.1 2.1 4.7-5"/></svg></div>
+                <div><p class="section-kicker">连续完成 7 天</p><h2>七日补碳餐</h2></div>
+              </div>
+              <p class="food-description">连续完成7天后安排一顿正常补碳餐。可以增加主食，但不能变成全天暴食。</p>
+              <div class="tag-row"><span class="glass-tag">一顿正常餐</span><span class="glass-tag">不是放纵日</span></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="page" id="page-posture" data-page="posture" aria-labelledby="posture-title" hidden>
+          <header class="page-header">
+            <div><p class="eyebrow">每天早晨 · 约 20 分钟</p><h1 class="large-title" id="posture-title">体态练习</h1></div>
+            <div class="header-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v18M7 6.5c1.2 1 2.9 1.5 5 1.5s3.8-.5 5-1.5M8.5 12c1 .7 2.1 1 3.5 1s2.5-.3 3.5-1M6 21c.8-3.2 2.8-5 6-5s5.2 1.8 6 5"/></svg></div>
+          </header>
+
+          <article class="glass-card routine-card">
+            <div class="routine-summary">
+              <div><p class="section-kicker">晨间序列</p><h2>呼吸 · 活动 · 激活 · 拉伸</h2></div>
+              <span class="duration-pill">20 分钟</span>
+            </div>
+            <ol class="exercise-list">
+              <li><span class="exercise-number">01</span><div><h3>90/90呼吸</h3><p>2分钟</p></div></li>
+              <li><span class="exercise-number">02</span><div><h3>猫牛式</h3><p>10–12次</p></div></li>
+              <li><span class="exercise-number">03</span><div><h3>胸椎旋转</h3><p>每侧8次</p></div></li>
+              <li><span class="exercise-number">04</span><div><h3>墙天使</h3><p>2组 × 8–10次</p></div></li>
+              <li><span class="exercise-number">05</span><div><h3>Dead Bug</h3><p>2组 × 每侧8次</p></div></li>
+              <li><span class="exercise-number">06</span><div><h3>Bird Dog</h3><p>2组 × 每侧8次</p></div></li>
+              <li><span class="exercise-number">07</span><div><h3>臀桥</h3><p>3组 × 12次</p></div></li>
+              <li><span class="exercise-number">08</span><div><h3>髂腰肌拉伸</h3><p>每侧45–60秒</p></div></li>
+              <li><span class="exercise-number">09</span><div><h3>胸小肌拉伸</h3><p>每侧45–60秒</p></div></li>
+            </ol>
+          </article>
+
+          <aside class="glass-card health-note" aria-labelledby="health-note-title">
+            <div class="health-note-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"/><path d="M12 10v6M12 7.2v.1"/></svg></div>
+            <div><h2 id="health-note-title">健康提示</h2><p>胸廓内凹若属于骨性结构，训练主要改善呼吸、胸椎活动与肩背姿态；出现胸痛、心悸或异常气促时，应停止训练并就医。</p></div>
+          </aside>
+        </section>
+
+        <section class="page" id="page-progress" data-page="progress" aria-labelledby="progress-title" hidden>
+          <header class="page-header">
+            <div><p class="eyebrow">每一天都算数</p><h1 class="large-title" id="progress-title">进度</h1></div>
+          </header>
+
+          <article class="glass-card challenge-card" aria-labelledby="challenge-title">
+            <div class="challenge-header">
+              <div><p class="section-kicker">保持连续</p><h2 id="challenge-title">七日挑战</h2></div>
+              <div class="challenge-count"><strong id="challenge-count">0</strong><span>/ 7 天</span></div>
+            </div>
+            <div class="challenge-days" id="challenge-days" aria-label="最近七天完成情况"></div>
+            <div class="reward-note" id="reward-note" hidden>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 1.7 5.2H19l-4.3 3.2 1.7 5.1-4.4-3.1-4.4 3.1 1.7-5.1L5 8.2h5.3L12 3Z"/><path d="M5 20h14"/></svg>
+              <p><strong>七日挑战完成</strong><span>今天可以安排一顿正常补碳餐。</span></p>
+            </div>
+          </article>
+
+          <section class="content-section" aria-labelledby="weight-title">
+            <div class="section-heading">
+              <div><p class="section-kicker">轻量记录</p><h2 id="weight-title">体重</h2></div>
+            </div>
+            <form class="glass-card weight-form" id="weight-form" novalidate>
+              <label for="weight-input">今天的体重</label>
+              <div class="weight-entry-row">
+                <div class="weight-input-wrap">
+                  <input id="weight-input" name="weight" type="number" inputmode="decimal" min="60" max="400" step="0.1" placeholder="138.6" autocomplete="off" aria-describedby="weight-hint" />
+                  <span>斤</span>
+                </div>
+                <button class="primary-button" type="submit" aria-label="保存体重记录">保存</button>
+              </div>
+              <p class="form-hint" id="weight-hint">建议在每天相同时间、相同状态下测量。</p>
+            </form>
+          </section>
+
+          <section class="content-section history-section" aria-labelledby="history-title">
+            <div class="section-heading">
+              <div><p class="section-kicker">变化趋势</p><h2 id="history-title">历史记录</h2></div>
+              <span class="count-label" id="history-count">0 条</span>
+            </div>
+            <div class="glass-card weight-history" id="weight-history"></div>
+          </section>
+        </section>
+      </main>
+
+      <nav class="tab-bar" aria-label="主要导航" style="--tab-index: 0">
+        <span class="tab-selection" aria-hidden="true"></span>
+        <button class="tab-button is-active" type="button" data-tab="today" aria-label="今日" aria-current="page">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5V20H4v-9.5Z"/><path d="M9.5 20v-5.5h5V20"/></svg><span>今日</span>
+        </button>
+        <button class="tab-button" type="button" data-tab="food" aria-label="饮食">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3v7a3 3 0 0 0 3 3V3M5 7h3M8 13v8M16 3v18M16 3c2.2 1.4 3 3.4 3 5.5S17.8 12 16 12"/></svg><span>饮食</span>
+        </button>
+        <button class="tab-button" type="button" data-tab="posture" aria-label="体态">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="2.3"/><path d="M12 8v6M8 10.5l4 2 4-2M9 21l3-7 3 7"/></svg><span>体态</span>
+        </button>
+        <button class="tab-button" type="button" data-tab="progress" aria-label="进度">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V11M10 20V5M16 20v-7M22 20V2"/><path d="M2 20h20"/></svg><span>进度</span>
+        </button>
+      </nav>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="./app.js" defer></script>
+  </body>
+</html>
